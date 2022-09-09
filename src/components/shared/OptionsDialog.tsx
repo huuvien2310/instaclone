@@ -1,9 +1,9 @@
 import React from 'react';
 
-function OptionsDialog() {
+function OptionsDialog({ onClose }: any) {
     return (
         <div>
-            
+            dialog
         </div>
     );
 }

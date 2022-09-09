@@ -1,19 +1,19 @@
 import React from 'react';
 import { useLayoutStyles } from '../../styles';
+import SEO from "../shared/Seo";
 
-function Layout({ children }: any) {
+function Layout({ children, title, marginTop = 60 }: any) {
     const classes = useLayoutStyles();
 
     return (
-        <div className={classes.section}>
-            <div className={classes.main}>
-                <div className={classes.childrenWrapper}>
-                    <div className={classes.children}>
-                        {children}
-                    </div>
-                </div>
-            </div>
-        </div>
+        <section className={classes.section}>
+            <SEO title={title}/>
+            <main className={classes.main} style={{ marginTop }}>
+                <section className={classes.childrenWrapper}>
+                    <div className={classes.children}>{children}</div>
+                </section>
+            </main>
+        </section>
     );
 }
 

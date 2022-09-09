@@ -1,10 +1,19 @@
 import React from 'react';
+import { Button } from '@material-ui/core';
+import { useFollowButtonStyles } from '../../styles';
 
-function FollowButton() {
+function FollowButton({ side }: any) {
+    const classes = useFollowButtonStyles({ side });
+    
     return (
-        <div>
-            
-        </div>
+        <Button
+            variant={side ? "text" : "contained"}
+            color="primary"
+            className={classes.button}
+            fullWidth
+        >
+            Follow
+        </Button>
     );
 }
 

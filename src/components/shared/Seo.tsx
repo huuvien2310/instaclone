@@ -1,12 +1,13 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
 function Seo( { title }: any ) {
     const defaultTitle = title ? `${title} · Instagram` : "Instagram";
     
     return (
-        <div>
+        <Helmet>
           <title>{defaultTitle}</title>
-        </div>
+        </Helmet>
     );
 }
 
