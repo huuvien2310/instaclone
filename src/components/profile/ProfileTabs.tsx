@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProfileTabs() {
+function ProfileTabs({ user, isOwner }: any) {
     return (
         <div>
             

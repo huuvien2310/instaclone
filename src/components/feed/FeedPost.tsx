@@ -1,6 +1,6 @@
 import React from 'react';
 import UserCard from '../shared/UserCard';
-import { useFeedPostStyles } from "../../styles";
+import { useFeedPostStyles } from "./styles";
 import { Link } from 'react-router-dom';
 import {
     MoreIcon,

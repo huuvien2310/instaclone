@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
-import { useFollowButtonStyles } from '../../styles';
+import { useFollowButtonStyles } from './styles/useFollowButtonStyles';
 
 function FollowButton({ side }: any) {
     const classes = useFollowButtonStyles({ side });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useFeedPageStyles } from '../styles';
+import { useFeedPageStyles } from './styles/useFeedPageStyles';
 import Layout from '../components/shared/Layout';
 import UserCard from "../components/shared/UserCard";
 import FeedSideSuggestions from "../components/feed/FeedSideSuggestions";

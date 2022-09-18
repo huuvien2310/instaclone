@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNotificationTooltipStyles } from "../../styles";
+import { useNotificationTooltipStyles } from "./styles";
 import { Typography } from "@material-ui/core";
 
 function NotificationTooltip() {

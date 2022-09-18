@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLoginPageStyles } from '../styles';
+import { useLoginPageStyles } from './styles/useLoginPageStyles';
 import SEO from '../components/shared/Seo';
 import {
     Card,

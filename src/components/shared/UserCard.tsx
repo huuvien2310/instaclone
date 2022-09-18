@@ -1,5 +1,5 @@
 import React from 'react';
-import { useUserCardStyles } from "../../styles";
+import { useUserCardStyles } from "./styles/useUserCardStyles";
 import { Link } from "react-router-dom";
 import { Avatar, Typography } from "@material-ui/core";
 import { getDefaultUser } from '../../data';

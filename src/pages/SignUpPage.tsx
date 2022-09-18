@@ -1,5 +1,5 @@
 import React from "react";
-import { useSignUpPageStyles } from "../styles";
+import { useSignUpPageStyles } from "./styles/useSignUpPageStyles";
 import SEO from "../components/shared/Seo";
 import { Card, Typography, TextField, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";

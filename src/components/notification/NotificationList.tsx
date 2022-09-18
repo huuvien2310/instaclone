@@ -1,10 +1,10 @@
 import React from "react";
-import { useNotificationListStyles } from "../../styles";
 import { Grid, Avatar, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import FollowButton from "../shared/FollowButton";
 import useOutsideClick from "@rooks/use-outside-click";
 import { defaultNotifications } from "../../data";
+import { useNotificationListStyles } from "./styles";
 // import { useOnClickOutside } from 'usehooks-ts';
 
 function NotificationList({ handleHideList }: any) {

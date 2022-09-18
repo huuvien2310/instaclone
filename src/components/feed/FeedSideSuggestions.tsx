@@ -2,7 +2,7 @@ import { Paper, Typography } from '@material-ui/core';
 import React from 'react';
 import UserCard from "../shared/UserCard";
 import { LoadingIcon } from '../../icons';
-import { useFeedSideSuggestionsStyles } from '../../styles';
+import { useFeedSideSuggestionsStyles } from './styles';
 import FollowButton from '../shared/FollowButton';
 import { getDefaultUser } from "../../data";
 

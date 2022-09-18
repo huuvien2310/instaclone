@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLayoutStyles } from '../../styles';
+import { useLayoutStyles } from './styles/useLayoutStyles';
 import SEO from "../shared/Seo";
 import Navbar from './Navbar';
 
