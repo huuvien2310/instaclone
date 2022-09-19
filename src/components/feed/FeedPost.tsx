@@ -33,7 +33,6 @@ function FeedPost({ post, index } : any) {
       <>
         <article
           className={classes.article}
-        //   style={{ marginBottom: showFollowSuggestions && 30 }}
         >
           {/* Feed Post Header */}
           <div className={classes.postHeader}>
@@ -61,7 +60,7 @@ function FeedPost({ post, index } : any) {
               <span>{likes === 1 ? "1 like" : `${likes} likes`}</span>
             </Typography>
             <div className={showCaption ? classes.expanded : classes.collapsed}>
-              <Link to={`/${user.username}`}>
+              <Link to={`/${user.username}`} style={{textDecoration: "none", color: "inherit"}}>
                 <Typography
                   variant="subtitle2"
                   component="span"
@@ -94,7 +93,7 @@ function FeedPost({ post, index } : any) {
                 </div>
               )}
             </div>
-            <Link to={`/p/${id}`}>
+            <Link to={`/p/${id}`} style={{textDecoration: "none"}}>
               <Typography
                 className={classes.commentsLink}
                 variant="body2"

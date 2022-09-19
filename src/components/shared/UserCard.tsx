@@ -18,7 +18,7 @@ function UserCard({ avatarSize = 44, user = getDefaultUser() }) {
             />
         </Link>
         <div className={classes.nameWrapper}>
-            <Link to={`/${username}`}>
+            <Link to={`/${username}`} style={{textDecoration: "none", color: "inherit"}}>
             <Typography variant="subtitle2" className={classes.typography}>
                 {username}
             </Typography>

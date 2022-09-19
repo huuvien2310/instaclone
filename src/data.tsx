@@ -13,7 +13,7 @@ export function getDefaultUser(){
 export const defaultPost = {
     id: uuid(),
     likes: 10,
-    caption: `<span class="">Do you know the 10 JavaScript concepts you need to learn React? 🤔⚛️👇<br>•<br>•<br>👉 Get the FREE cheatsheet to learn them now: bit.ly/10-js-tips 🔥</span>`,
+    caption: `<span class=""> COOKIN COOKIN🔥<br>Stay tuned</span>`,
     user: defaultUser,
     media:
     "https://assets.weforum.org/article/image/large_LrVQTyj8uByRPF1m_77TomiqDKBGOTWEZZWr3NUTqTE.jpg",

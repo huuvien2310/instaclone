@@ -11,17 +11,19 @@ import SignUpPage from './pages/SignUpPage';
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/accounts/edit" element={<EditProfilePage />} />
-        <Route path="/explore" element={<ExplorePage />} />
-        <Route path="/" element={<FeedPage />} />
-        <Route path="/accounts/login" element={<LoginPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path="/p/:postId" element={<PostPage />} />
-        <Route path="/:username" element={<ProfilePage />} />
-        <Route path="/accounts/emailsignup" element={<SignUpPage />} />
-      </Routes>
-    </Router>
+    <>
+      <Router>
+        <Routes>
+          <Route path="/accounts/edit" element={<EditProfilePage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/" element={<FeedPage />} />
+          <Route path="/accounts/login" element={<LoginPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/p/:postId" element={<PostPage />} />
+          <Route path="/:username" element={<ProfilePage />} />
+          <Route path="/accounts/emailsignup" element={<SignUpPage />} />
+        </Routes>
+      </Router>
+    </>
   );
 }

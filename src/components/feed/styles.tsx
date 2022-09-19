@@ -4,10 +4,10 @@ export const useFeedPostStyles = makeStyles((theme) => ({
     article: {
         border: "1px solid #e6e6e6",
         background: "#ffffff",
-        marginBottom: 60,
+        marginBottom: 20,
         [theme.breakpoints.down("xs")]: {
-        border: "unset",
-        marginBottom: 0
+            border: "unset",
+            marginBottom: 0
         }
     },
     postHeader: {
@@ -113,7 +113,7 @@ export const useFeedPostStyles = makeStyles((theme) => ({
     },
     commentsLink: {
         color: "#999",
-        margin: "5px 0 !important"
+        margin: "5px 0 !important",
     },
     collapsed: {
         display: "flex",
