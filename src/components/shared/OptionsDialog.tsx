@@ -5,40 +5,37 @@ import { Link } from "react-router-dom";
 import { defaultPost } from "../../data";
 
 function OptionsDialog({ onClose }: any) {
-    const classes = useOptionsDialogStyles();
+  const classes = useOptionsDialogStyles();
 
-    return (
-        <Dialog
-        open
-        classes={{
-            scrollPaper: classes.dialogScrollPaper
-        }}
-        onClose={onClose}
-        TransitionComponent={Zoom}
+  return (
+    <Dialog
+      open
+      classes={{
+        scrollPaper: classes.dialogScrollPaper,
+      }}
+      onClose={onClose}
+      TransitionComponent={Zoom}
+    >
+      <Button className={classes.redButton}>Unfollow</Button>
+      <Divider />
+      <Button className={classes.button}>
+        <Link
+          to={`/p/${defaultPost.id}`}
+          style={{ textDecoration: "none", color: "inherit" }}
         >
-            <Button className={classes.redButton}>
-                Unfollow
-            </Button>
-            <Divider />
-            <Button className={classes.button}>
-                <Link to={`/p/${defaultPost.id}`} style={{textDecoration: "none", color: "inherit"}}>
-                    Go to post
-                </Link>
-            </Button>
-            <Divider />
-            <Button className={classes.button}>
-                Share
-            </Button>
-            <Divider />
-            <Button className={classes.button}>
-                Copy Link
-            </Button>
-            <Divider />
-            <Button onClick={onClose} className={classes.button}>
-                Cancel
-            </Button>
-        </Dialog>
-    );
+          Go to post
+        </Link>
+      </Button>
+      <Divider />
+      <Button className={classes.button}>Share</Button>
+      <Divider />
+      <Button className={classes.button}>Copy Link</Button>
+      <Divider />
+      <Button onClick={onClose} className={classes.button}>
+        Cancel
+      </Button>
+    </Dialog>
+  );
 }
 
 export default OptionsDialog;

@@ -1,11 +1,15 @@
-import React from 'react';
+import React from "react";
+import ExploreGrid from "../components/explore/ExploreGrid";
+import Search from "../components/explore/Search";
+import Layout from "../components/shared/Layout";
 
 function ExplorePage() {
-    return (
-        <div>
-            
-        </div>
-    );
+  return (
+    <Layout>
+      <Search />
+      <ExploreGrid />
+    </Layout>
+  );
 }
 
 export default ExplorePage;

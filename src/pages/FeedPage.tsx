@@ -1,14 +1,14 @@
-import React from 'react';
-import { useFeedPageStyles } from './styles/useFeedPageStyles';
-import Layout from '../components/shared/Layout';
+import React from "react";
+import { useFeedPageStyles } from "./styles/useFeedPageStyles";
+import Layout from "../components/shared/Layout";
 import UserCard from "../components/shared/UserCard";
 import FeedSideSuggestions from "../components/feed/FeedSideSuggestions";
-import { Box } from '@mui/system';
+import { Box } from "@mui/system";
 import LoadingScreen from "../components/shared/LoadingScreen";
 import { LoadingLargeIcon } from "../icons";
 import FeedPostSkeleton from "../components/feed/FeedPostSkeleton";
-import FeedPost from '../components/feed/FeedPost';
-import { getDefaultPost } from '../data';
+import FeedPost from "../components/feed/FeedPost";
+import { getDefaultPost } from "../data";
 
 function FeedPage() {
   const classes = useFeedPageStyles();
@@ -34,7 +34,7 @@ function FeedPage() {
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <div className={classes.sidebarContainer}>
             <div className={classes.sidebarWrapper}>
-              <UserCard/>
+              <UserCard />
               <FeedSideSuggestions />
             </div>
           </div>
