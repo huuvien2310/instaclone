@@ -8,7 +8,7 @@ function GridPost({ post }: any) {
   const navigate = useNavigate();
 
   function handleOpenPost() {
-    navigate(`/p/${post.id}`);
+    navigate(`/p/${post.id}`, { state: { modal: true } });
   }
 
   return (

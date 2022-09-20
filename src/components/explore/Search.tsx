@@ -4,7 +4,7 @@ import React from "react";
 import { LoadingIcon } from "../../icons";
 import { useSearchStyles } from "./styles";
 
-export default function Search() {
+function Search() {
   const classes = useSearchStyles();
   const [loading] = React.useState(false);
   const [query, setQuery] = React.useState("");
@@ -41,3 +41,5 @@ export default function Search() {
     </Box>
   );
 }
+
+export default Search;

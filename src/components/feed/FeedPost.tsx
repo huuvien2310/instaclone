@@ -14,7 +14,6 @@ import {
 import { Typography, Button, Divider, TextField } from "@material-ui/core";
 import HTMLEllipsis from "react-lines-ellipsis/lib/html";
 import { Box } from "@mui/system";
-import FollowSuggestions from "../shared/FollowSuggestions";
 import OptionsDialog from "../shared/OptionsDialog";
 
 function FeedPost({ post, index }: any) {
@@ -22,7 +21,6 @@ function FeedPost({ post, index }: any) {
   const [showCaption, setCaption] = React.useState(false);
   const [showOptionsDialog, setOptionsDialog] = React.useState(false);
   const { id, media, likes, user, caption, comments } = post;
-  const showFollowSuggestions = index === 1;
 
   return (
     <>
@@ -123,7 +121,6 @@ function FeedPost({ post, index }: any) {
           <Comment />
         </Box>
       </article>
-      {showFollowSuggestions && <FollowSuggestions />}
       {showOptionsDialog && (
         <OptionsDialog onClose={() => setOptionsDialog(false)} />
       )}

@@ -2,7 +2,7 @@ import React from "react";
 import { useNProgress } from "@tanem/react-nprogress";
 import { useNavbarStyles, RedTooltip } from "./styles/useNavbarStyles";
 import { Link, useLocation } from "react-router-dom";
-import { AppBar, Avatar, Hidden, Zoom } from "@material-ui/core";
+import { AppBar, Avatar, Zoom } from "@material-ui/core";
 import logo from "../../images/logo.png";
 import NotificationList from "../notification/NotificationList";
 import {

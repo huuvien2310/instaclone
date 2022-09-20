@@ -6,7 +6,7 @@ import { getDefaultUser } from "../../data";
 
 function UserCard({ avatarSize = 44, user = getDefaultUser() }) {
   const classes = useUserCardStyles({ avatarSize });
-  const { profile_image, username } = user;
+  const { profile_image, username, name } = user;
 
   return (
     <div className={classes.container}>
@@ -30,7 +30,9 @@ function UserCard({ avatarSize = 44, user = getDefaultUser() }) {
           color="textSecondary"
           variant="body2"
           className={classes.typography}
-        ></Typography>
+        >
+          {name}
+        </Typography>
       </div>
     </div>
   );
