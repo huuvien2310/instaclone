@@ -58,7 +58,11 @@ function ProfilePage() {
           <Card className={classes.cardSmall}>
             <CardContent>
               <section className={classes.sectionSmall}>
-                <ProfilePicture size={77} isOwner={isOwner} />
+                <ProfilePicture
+                  image={defaultCurrentUser.profile_image}
+                  size={77}
+                  isOwner={isOwner}
+                />
                 <ProfileNameSection
                   user={defaultCurrentUser}
                   isOwner={isOwner}
