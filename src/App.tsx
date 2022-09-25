@@ -14,12 +14,16 @@ import NotFoundPage from "./pages/NotFoundPage";
 import PostPage from "./pages/PostPage";
 import ProfilePage from "./pages/ProfilePage";
 import SignUpPage from "./pages/SignUpPage";
+import { AuthContext } from "./AuthProvider";
 
 interface CustomizedState {
   modal: boolean;
 }
 
 export default function App() {
+  //@ts-ignore
+  const { authState } = React.useContext(AuthContext)
+  console.log(authState);
   const navigationType = useNavigationType();
   const location = useLocation();
   const prevLocation = React.useRef(location);

@@ -2,11 +2,32 @@ import React from "react";
 import { useSignUpPageStyles } from "./styles/useSignUpPageStyles";
 import SEO from "../components/shared/Seo";
 import { Card, Typography, TextField, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginWithFacebook } from "./LoginPage";
+import { AuthContext } from "../AuthProvider";
 
 function SignUpPage() {
   const classes = useSignUpPageStyles();
+  //@ts-ignore
+  const { signUpWithEmailAndPassword } = React.useContext(AuthContext);
+  const [values, setValues] = React.useState({
+    email: "",
+    password: "",
+    username: "",
+    name: "",
+  });
+  const navigate = useNavigate();
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    setValues((prev) => ({ ...prev, [name]: value }));
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    signUpWithEmailAndPassword(values);
+    navigate("/");
+  }
 
   return (
     <>
@@ -30,7 +51,7 @@ function SignUpPage() {
               </Typography>
               <div className={classes.orLine} />
             </div>
-            <form>
+            <form onSubmit={handleSubmit}>
               <TextField
                 fullWidth
                 variant="filled"
@@ -38,6 +59,8 @@ function SignUpPage() {
                 type="email"
                 margin="dense"
                 className={classes.textField}
+                name="email"
+                onChange={handleChange}
               />
               <TextField
                 fullWidth
@@ -45,6 +68,8 @@ function SignUpPage() {
                 label="Full Name"
                 margin="dense"
                 className={classes.textField}
+                name="name"
+                onChange={handleChange}
               />
               <TextField
                 fullWidth
@@ -53,6 +78,8 @@ function SignUpPage() {
                 margin="dense"
                 className={classes.textField}
                 autoComplete="username"
+                name="username"
+                onChange={handleChange}
               />
               <TextField
                 fullWidth
@@ -62,6 +89,8 @@ function SignUpPage() {
                 margin="dense"
                 className={classes.textField}
                 autoComplete="new-password"
+                name="password"
+                onChange={handleChange}
               />
               <Button
                 variant="contained"
