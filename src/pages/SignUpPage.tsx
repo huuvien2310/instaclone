@@ -4,12 +4,12 @@ import SEO from "../components/shared/Seo";
 import { Card, Typography, TextField, Button } from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginWithFacebook } from "./LoginPage";
-import { AuthContext } from "../AuthProvider";
+import { UserAuth } from "../Auth";
 
 function SignUpPage() {
   const classes = useSignUpPageStyles();
   //@ts-ignore
-  const { signUpWithEmailAndPassword } = React.useContext(AuthContext);
+  const { signUpWithEmailAndPassword } = UserAuth();
   const [values, setValues] = React.useState({
     email: "",
     password: "",

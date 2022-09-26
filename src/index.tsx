@@ -6,19 +6,19 @@ import theme from "./theme";
 import App from "./App";
 import { ApolloProvider } from "@apollo/react-hooks";
 import client from "./graphql/client";
-import AuthProvider from "./AuthProvider";
+import AuthContextProvider from "./Auth";
 
 ReactDOM.render(
   //@ts-ignore
   <ApolloProvider client={client}>
-    <AuthProvider>
+    <AuthContextProvider>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <Router>
           <App />
         </Router>
       </MuiThemeProvider>
-    </AuthProvider>
+    </AuthContextProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );
