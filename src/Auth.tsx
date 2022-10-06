@@ -1,7 +1,11 @@
 import React from "react";
 import { initializeApp } from "firebase/app";
-import { getDatabase, onValue, ref} from "firebase/database";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useMutation } from "@apollo/react-hooks";
 import { CREATE_USER } from "./graphql/mutations";
 import defaultUserImage from "./images/default-user-image.jpg";
@@ -24,20 +28,20 @@ const database = getDatabase(app);
 export const auth = getAuth(app);
 
 interface AuthContextProps {
+  authState: {
+    status: string;
+  };
+  signOut: () => void;
   signUpWithEmailAndPassword: (formData: any) => void;
+  logInWithEmailAndPassword: (email: any, password: any) => void;
 }
 
-const AuthContext = React.createContext<AuthContextProps | null>(null);
-
-export function UserAuth() {
-  return React.useContext(AuthContext);
-}
+export const AuthContext = React.createContext<AuthContextProps | null>(null);
 
 export default function AuthContextProvider({ children }: any) {
   const [authState, setAuthState] = React.useState({ status: "loading" });
   const [createUser] = useMutation(CREATE_USER);
 
-  console.log(authState);
   React.useEffect(() => {
     return auth.onAuthStateChanged(async (user: any) => {
       if (user) {
@@ -70,6 +74,12 @@ export default function AuthContextProvider({ children }: any) {
     });
   }, []);
 
+  async function signOut() {
+    setAuthState({ status: "loading" });
+    await auth.signOut();
+    setAuthState({ status: "out" });
+  }
+
   async function signUpWithEmailAndPassword(formData: any) {
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -95,13 +105,21 @@ export default function AuthContextProvider({ children }: any) {
     }
   }
 
+  async function logInWithEmailAndPassword(email: any, password: any) {
+    const data = await signInWithEmailAndPassword(auth, email, password);
+    return data;
+  }
+
   if (authState.status === "loading") {
     return null;
   } else {
     return (
       <AuthContext.Provider
         value={{
+          authState,
+          signOut,
           signUpWithEmailAndPassword,
+          logInWithEmailAndPassword,
         }}
       >
         {children}

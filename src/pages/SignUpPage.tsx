@@ -1,33 +1,82 @@
 import React from "react";
 import { useSignUpPageStyles } from "./styles/useSignUpPageStyles";
 import SEO from "../components/shared/Seo";
-import { Card, Typography, TextField, Button } from "@material-ui/core";
+import {
+  Card,
+  Typography,
+  TextField,
+  Button,
+  InputAdornment,
+} from "@material-ui/core";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginWithFacebook } from "./LoginPage";
-import { UserAuth } from "../Auth";
+import { AuthContext } from "../Auth";
+import { useForm } from "react-hook-form";
+import isEmail from "validator/es/lib/isEmail";
+import { useApolloClient } from "@apollo/react-hooks";
+import { CHECK_IF_USERNAME_TAKEN } from "../graphql/queries";
+import { CheckCircleOutline, HighlightOff } from "@material-ui/icons";
+
+interface IFormInputs {
+  email: string;
+  name: string;
+  username: string;
+  password: string;
+}
 
 function SignUpPage() {
   const classes = useSignUpPageStyles();
-  //@ts-ignore
-  const { signUpWithEmailAndPassword } = UserAuth();
-  const [values, setValues] = React.useState({
-    email: "",
-    password: "",
-    username: "",
-    name: "",
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields, isSubmitting, isValid },
+  } = useForm<IFormInputs>({ mode: "onBlur" });
+  const signUpWithEmailAndPassword = React.useContext(AuthContext)!
+    .signUpWithEmailAndPassword;
+  const [error, setError]: any = React.useState("");
   const navigate = useNavigate();
+  const client = useApolloClient();
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
-    setValues((prev) => ({ ...prev, [name]: value }));
+  async function onSubmit(data: any) {
+    try {
+      setError("");
+      await signUpWithEmailAndPassword(data);
+      setTimeout(() => navigate("/"), 0);
+    } catch (error) {
+      console.error("Error signing up", error);
+      handleError(error);
+    }
   }
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    signUpWithEmailAndPassword(values);
-    navigate("/");
+  function handleError(error: any) {
+    if (error.message.includes("users_username_key")) {
+      setError("Username already taken");
+    } else if (error.code.includes("auth")) {
+      setError(error.message);
+    }
   }
+
+  async function validateUsername(username: string): Promise<boolean> {
+    const variables = { username };
+    const response = await client.query({
+      query: CHECK_IF_USERNAME_TAKEN,
+      variables,
+    });
+    const isUsernameValid = response.data.users.length === 0;
+    return isUsernameValid;
+  }
+
+  const errorIcon = (
+    <InputAdornment position="start">
+      <HighlightOff style={{ color: "red", height: 30, width: 30 }} />
+    </InputAdornment>
+  );
+
+  const validIcon = (
+    <InputAdornment position="end">
+      <CheckCircleOutline style={{ color: "#ccc", height: 30, width: 30 }} />
+    </InputAdornment>
+  );
 
   return (
     <>
@@ -51,37 +100,73 @@ function SignUpPage() {
               </Typography>
               <div className={classes.orLine} />
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <TextField
+                {...register("email", {
+                  required: true,
+                  validate: (value) => isEmail(value),
+                })}
+                InputProps={{
+                  endAdornment: errors.email
+                    ? errorIcon
+                    : touchedFields.email && validIcon,
+                }}
                 fullWidth
                 variant="filled"
-                label="Mobile Number or Email"
+                label="Email"
                 type="email"
                 margin="dense"
                 className={classes.textField}
-                name="email"
-                onChange={handleChange}
               />
               <TextField
+                {...register("name", {
+                  required: true,
+                  minLength: 5,
+                  maxLength: 20,
+                })}
+                InputProps={{
+                  endAdornment: errors.name
+                    ? errorIcon
+                    : touchedFields.name && validIcon,
+                }}
                 fullWidth
                 variant="filled"
                 label="Full Name"
                 margin="dense"
                 className={classes.textField}
-                name="name"
-                onChange={handleChange}
               />
               <TextField
+                {...register("username", {
+                  required: true,
+                  minLength: 5,
+                  maxLength: 20,
+                  // accept only lowercase/uppercase letters, numbers, periods and underscores
+                  pattern: /^[a-zA-Z0-9_.]*$/,
+                  validate: async (username) =>
+                    await validateUsername(username),
+                })}
+                InputProps={{
+                  endAdornment: errors.username
+                    ? errorIcon
+                    : touchedFields.username && validIcon,
+                }}
                 fullWidth
                 variant="filled"
                 label="Username"
                 margin="dense"
                 className={classes.textField}
                 autoComplete="username"
-                name="username"
-                onChange={handleChange}
               />
               <TextField
+                {...register("password", {
+                  required: true,
+                  minLength: 5,
+                })}
+                InputProps={{
+                  endAdornment: errors.password
+                    ? errorIcon
+                    : touchedFields.password && validIcon,
+                }}
                 fullWidth
                 variant="filled"
                 label="Password"
@@ -89,19 +174,20 @@ function SignUpPage() {
                 margin="dense"
                 className={classes.textField}
                 autoComplete="new-password"
-                name="password"
-                onChange={handleChange}
               />
               <Button
+                type="submit"
+                disabled={error || !isValid || isSubmitting}
                 variant="contained"
                 fullWidth
                 color="primary"
                 className={classes.button}
-                type="submit"
               >
                 Sign Up
               </Button>
             </form>
+            {/* @ts-ignore */}
+            <AuthError error={error} />
           </Card>
           <Card className={classes.loginCard}>
             <Typography align="right" variant="body2">
@@ -116,6 +202,21 @@ function SignUpPage() {
         </article>
       </section>
     </>
+  );
+}
+
+export function AuthError({ error }: any) {
+  return (
+    Boolean(error) && (
+      <Typography
+        align="center"
+        gutterBottom
+        variant="body2"
+        style={{ color: "red" }}
+      >
+        {error}
+      </Typography>
+    )
   );
 }
 

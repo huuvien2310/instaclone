@@ -5,6 +5,7 @@ import {
   useLocation,
   useNavigationType,
 } from "react-router-dom";
+import { AuthContext } from "./Auth";
 import PostModal from "./components/post/PostModal";
 import EditProfilePage from "./pages/EditProfilePage";
 import ExplorePage from "./pages/ExplorePage";
@@ -20,6 +21,8 @@ interface CustomizedState {
 }
 
 export default function App() {
+  const authState = React.useContext(AuthContext)!.authState;
+  const isAuth = authState.status === "in";
   const navigationType = useNavigationType();
   const location = useLocation();
   const prevLocation = React.useRef(location);
@@ -33,6 +36,16 @@ export default function App() {
   }, [location, modal, navigationType]);
 
   const isModalOpen = modal && prevLocation.current !== location;
+
+  if(!isAuth) {
+    return (
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/accounts/emailsignup" element={<SignUpPage />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    );
+  }
 
   return (
     <>
